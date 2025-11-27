@@ -1,0 +1,29 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ dev, master ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set ENV
+        run: |
+          if [[ "${GITHUB_REF##*/}" == "master" ]]; then
+            echo "SERVICE=site-api" >> $GITHUB_ENV
+          else
+            echo "SERVICE=site-api-dev" >> $GITHUB_ENV
+          fi
+
+      - name: Build image
+        run: |
+          docker compose build $SERVICE
+
+      - name: Restart Docker
+        run: |
+          docker compose up -d --force-recreate $SERVICE nginx

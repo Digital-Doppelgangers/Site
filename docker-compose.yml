@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - site-api
+      - site-api-dev
+
+  site-api:
+    build:
+      context: ./Site.Api
+      dockerfile: Dockerfile
+    container_name: site-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    restart: always
+
+  site-api-dev:
+    build:
+      context: ./Site.Api
+      dockerfile: Dockerfile
+    container_name: site-api-dev
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: always
