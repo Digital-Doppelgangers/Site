@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "TJRG0jCX8hHszC8I5e19XJLkePUR6i8WvVjVdvnDeRc=",
+  "Source": "Site.Core",
+  "BasePath": "_content/Site.Core",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
