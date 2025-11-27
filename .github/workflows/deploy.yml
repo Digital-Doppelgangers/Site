@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ dev, master ]
+    branches: [ dev, main ]
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Set ENV
         run: |
-          if [[ "${GITHUB_REF##*/}" == "master" ]]; then
+          if [[ "${GITHUB_REF##*/}" == "main" ]]; then
             echo "SERVICE=site-api" >> $GITHUB_ENV
           else
             echo "SERVICE=site-api-dev" >> $GITHUB_ENV
